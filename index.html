@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next Level Chef Ultimate Competition Study Guide - Complete Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-red: #ff6b6b;
+            --primary-orange: #ff8e53;
+            --primary-purple: #667eea;
+            --primary-purple-dark: #764ba2;
+            --success-green: #28a745;
+            --warning-yellow: #ffc107;
+            --info-blue: #17a2b8;
+            --danger-red: #dc3545;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-purple-dark) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-orange) 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e9ecef;
+            overflow-x: auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #495057;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -3px;
+            position: relative;
+        }
+        
+        .tab-button:hover {
+            background: #e9ecef;
+            color: #212529;
+        }
+        
+        .tab-button.active {
+            color: var(--primary-red);
+            border-bottom-color: var(--primary-red);
+            background: white;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-red), var(--primary-orange));
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-box {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            position: sticky;
+            top: 60px;
+            z-index: 50;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        .recipe-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary-red);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .recipe-card h3 {
+            color: var(--primary-red);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+        
+        .recipe-card h4 {
+            color: #495057;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            background: #e9ecef;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+        
+        .recipe-identity {
+            font-style: italic;
+            color: #6c757d;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .ingredients-list {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .ingredients-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .ingredients-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f1f3f5;
+            display: flex;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        
+        .ingredients-list li:hover {
+            background: #f8f9fa;
+        }
+        
+        .ingredients-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .ingredients-list li span:first-child {
+            font-weight: 500;
+            color: #212529;
+        }
+        
+        .ingredients-list li span:last-child {
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+        
+        .timeline {
+            background: #fff3cd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--warning-yellow);
+        }
+        
+        .timeline h4 {
+            background: var(--warning-yellow);
+            color: #856404;
+        }
+        
+        .timeline-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid var(--warning-yellow);
+            padding-left: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .timeline-time {
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-right: 10px;
+            display: inline-block;
+            min-width: 60px;
+        }
+        
+        .cue-box {
+            background: #d1ecf1;
+            border: 2px solid #bee5eb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .cue-box h4 {
+            background: var(--info-blue);
+            color: white;
+        }
+        
+        .safety-box {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .safety-box h4 {
+            background: var(--danger-red);
+            color: white;
+        }
+        
+        .pivot-box {
+            background: #d4edda;
+            border: 2px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .pivot-box h4 {
+            background: var(--success-green);
+            color: white;
+        }
+        
+        .sauce-card {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-purple-dark) 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .sauce-card h4 {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .sauce-ingredients {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        
+        .sauce-ingredients ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sauce-ingredients li {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .quick-ref-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);
+        }
+        
+        .quick-ref-card h3 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .technique-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .technique-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-top: 4px solid var(--primary-red);
+            transition: transform 0.3s;
+        }
+        
+        .technique-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .technique-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 15px;
+        }
+        
+        .technique-card h4 {
+            color: #495057;
+            margin: 15px 0 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .conversion-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .conversion-table th {
+            background: var(--primary-red);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .conversion-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .conversion-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .alarm-schedule {
+            background: #fff3cd;
+            border: 3px solid var(--warning-yellow);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .alarm-schedule h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .alarm-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.2s;
+        }
+        
+        .alarm-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .alarm-time {
+            font-weight: bold;
+            color: var(--primary-red);
+            font-size: 1.3em;
+            min-width: 120px;
+        }
+        
+        .print-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .print-button:hover {
+            background: var(--primary-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 142, 83, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .tabs {
+                overflow-x: scroll;
+            }
+            
+            .tab-button {
+                font-size: 0.9em;
+                padding: 12px 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .recipe-card {
+                padding: 15px;
+            }
+            
+            .technique-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            .tabs, .search-box, .print-button {
+                display: none;
+            }
+            
+            .tab-content {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 NEXT LEVEL CHEF ULTIMATE COMPETITION STUDY GUIDE 🔥</h1>
+            <p>Complete Resource with 30-Minute Competition Recipes & Pro Techniques!</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('main-dishes')">Main Dishes (1-9)</button>
+            <button class="tab-button" onclick="showTab('vegetarian')">Vegetarian (10-18)</button>
+            <button class="tab-button" onclick="showTab('specialty')">Specialty Dishes</button>
+            <button class="tab-button" onclick="showTab('sauces')">Complete Sauce Library</button>
+            <button class="tab-button" onclick="showTab('sides')">Sides & Accompaniments</button>
+            <button class="tab-button" onclick="showTab('quick-breads')">Quick Breads & Doughs</button>
+            <button class="tab-button" onclick="showTab('pickles')">Elite Pickle System</button>
+            <button class="tab-button" onclick="showTab('techniques')">Pro Techniques</button>
+            <button class="tab-button" onclick="showTab('conversions')">All Conversions</button>
+            <button class="tab-button" onclick="showTab('timing')">Timing & Alarms</button>
+            <button class="tab-button" onclick="showTab('blindspots')">Big Blind Spots</button>
+        </div>
+        
+        <div id="main-dishes" class="tab-content active">
+            <h2>Main Protein Dishes (Recipes 1-9)</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search main dishes..." onkeyup="searchRecipes('main-dishes')">
+            </div>
+            
+            <div class="recipe-card">
+                <h3>1. Ribeye with Aji Verde and Charred Onion Jus</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Fire kissed steak. Bright green sauce. Savory onion wine glaze.</p>
+                <p><strong>Why it wins:</strong> Classic beef lane with clean acid and gloss.</p>
+                <p><strong>Yield:</strong> 1 large plate</p>
+                
+                <h4>Tools</h4>
+                <p>Cast iron 30 cm. Small sauce pan. Blender. Probe thermometer. Fine strainer. Spoons. Towel.</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Ribeye (3cm thick)</span><span>320g (11.3 oz)</span></li>
+                        <li><span>Fine salt</span><span>5.5g (1¼ tsp)</span></li>
+                        <li><span>Black pepper</span><span>1g (¼ tsp)</span></li>
+                        <li><span>Neutral oil</span><span>10g (2 tsp)</span></li>
+                        <li><span>Onion (wedges)</span><span>150g (⅔ cup)</span></li>
+                        <li><span>Dry red wine</span><span>150g (⅔ cup)</span></li>
+                        <li><span>Beef or chicken stock</span><span>200g (¾ cup + 2 tbsp)</span></li>
+                        <li><span>Cold butter</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Aji verde: cilantro</span><span>30g (2 tbsp)</span></li>
+                        <li><span>Jalapeño</span><span>15g (1 tbsp)</span></li>
+                        <li><span>Garlic</span><span>5g (1 tsp)</span></li>
+                        <li><span>Lime juice</span><span>25g (1½ tbsp)</span></li>
+                        <li><span>Mayonnaise</span><span>80g (⅓ cup)</span></li>
+                        <li><span>Olive oil</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Salt (for aji verde)</span><span>3g (½ tsp)</span></li>
+                        <li><span>Corn kernels</span><span>120g (½ cup)</span></li>
+                        <li><span>Hominy (drained)</span><span>120g (½ cup)</span></li>
+                        <li><span>Lime juice (for corn)</span><span>10g (2 tsp)</span></li>
+                        <li><span>Cilantro leaves</span><span>5g (1 tsp)</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Five Minute Mise</h4>
+                <ol>
+                    <li>Blend aji verde 2 minutes. Taste and set.</li>
+                    <li>Wedge onion. Drain hominy.</li>
+                    <li>Salt steak all over with 5.5g salt. Pepper 1g. Pat dry.</li>
+                </ol>
+                
+                <h4>Thirty Minute Clock</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><span class="timeline-time">00:00</span> Pan on high. Sauce pan medium.</div>
+                    <div class="timeline-item"><span class="timeline-time">00:30</span> Add 5g oil to cast iron.</div>
+                    <div class="timeline-item"><span class="timeline-time">01:00</span> Char onion in pan 4 minutes. Move to sauce pan.</div>
+                    <div class="timeline-item"><span class="timeline-time">05:00</span> Deglaze cast iron fond with 30g wine. Into sauce pan.</div>
+                    <div class="timeline-item"><span class="timeline-time">05:30</span> Add remaining wine and all stock to sauce pan. Reduce to about 120-140g by 16:00.</div>
+                    <div class="timeline-item"><span class="timeline-time">05:30</span> Wipe cast iron. Add 5g oil.</div>
+                    <div class="timeline-item"><span class="timeline-time">06:00</span> Ribeye in. Hard sear 2.5 minutes. Flip. Hard sear 2.5 minutes.</div>
+                    <div class="timeline-item"><span class="timeline-time">11:00</span> Baste with pan fat 30 seconds. Probe thickest point. Target 50-52°C (122-126°F) for medium rare at rest.</div>
+                    <div class="timeline-item"><span class="timeline-time">11:30</span> Rack and rest 6 minutes. Tent lightly.</div>
+                    <div class="timeline-item"><span class="timeline-time">12:00</span> Warm a small pan. Toss corn and hominy with 10g lime and a pinch of salt (1g). Heat 2 minutes.</div>
+                    <div class="timeline-item"><span class="timeline-time">16:00</span> Whisk 20g cold butter into onion jus off heat. Taste. Salt 1-2g if needed.</div>
+                    <div class="timeline-item"><span class="timeline-time">18:00</span> Slice steak across the grain into 1cm slices.</div>
+                    <div class="timeline-item"><span class="timeline-time">20:00</span> Plate: pool 40g onion jus. Fan steak. Spoon 35-45g aji verde in three swipes. Spoon corn hominy. Herb.</div>
+                </div>
+                
+                <div class="cue-box">
+                    <h4>Cues</h4>
+                    <p>Pan is ripping. Visible wisps. Steak releases cleanly to flip. Jus is glossy and coats a spoon. Aji verde vivid green.</p>
+                </div>
+                
+                <div class="safety-box">
+                    <h4>Safety and Sanitation</h4>
+                    <p>Dedicated raw zone. New board for slicing. Hot pan oils away from you. Wipe rims before serving.</p>
+                </div>
+                
+                <div class="pivot-box">
+                    <h4>Plate Build</h4>
+                    <p>Slice and pool. Height from meat fan. Green pop in odd number dots.</p>
+                    
+                    <h4>B Dish Pivot</h4>
+                    <p>No ribeye. Use sirloin 280g (10 oz). Same cook.</p>
+                    <p>Overcooked. Slice thinner. Glaze in jus 20 seconds.</p>
+                    
+                    <h4>Thirty Minute Variant</h4>
+                    <p>As written. For a 45 minute run add 8 minutes rest and a deeper reduction to 100g for extra gloss.</p>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>2. Peruvian Chicken Thigh with Aji Verde and Quick Potatoes</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Crispy skin thigh. Bright herb sauce. Crunchy potato.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Tools</h4>
+                <p>Oven at 200°C (400°F). Oven safe skillet. Small pot. Blender.</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Chicken thigh skin on</span><span>220g (7.8 oz)</span></li>
+                        <li><span>Fine salt</span><span>3.5g (¾ tsp)</span></li>
+                        <li><span>Garlic (grated)</span><span>4g (1 tsp)</span></li>
+                        <li><span>Cumin</span><span>1g (¼ tsp)</span></li>
+                        <li><span>Dry oregano</span><span>1g (¼ tsp)</span></li>
+                        <li><span>Sweet paprika</span><span>1g (¼ tsp)</span></li>
+                        <li><span>Potato (1.5cm dice)</span><span>220g (1 cup)</span></li>
+                        <li><span>Olive oil</span><span>15g (1 tbsp)</span></li>
+                        <li><span>Aji verde per recipe above</span><span>35g (2½ tbsp)</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Five Minute Mise</h4>
+                <ol>
+                    <li>Mix spice paste with 5g oil.</li>
+                    <li>Toss diced potatoes with 5g oil and 3g salt.</li>
+                    <li>Rub thigh all over. Salt remaining on flesh side.</li>
+                </ol>
+                
+                <h4>Thirty Minute Clock</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><span class="timeline-time">00:00</span> Skillet medium high.</div>
+                    <div class="timeline-item"><span class="timeline-time">00:30</span> Skin side down. Weight with small pan if needed.</div>
+                    <div class="timeline-item"><span class="timeline-time">00:30</span> Start potato in salted simmering water.</div>
+                    <div class="timeline-item"><span class="timeline-time">05:00</span> Transfer thigh to oven skin side up. Roast 10-12 minutes to 74°C (165°F).</div>
+                    <div class="timeline-item"><span class="timeline-time">05:00</span> Drain potato at knife tender. Dry in colander 1 minute.</div>
+                    <div class="timeline-item"><span class="timeline-time">07:00</span> Crisp potato in skillet with 5g oil 6 minutes.</div>
+                    <div class="timeline-item"><span class="timeline-time">17:00</span> Rest thigh 3 minutes.</div>
+                    <div class="timeline-item"><span class="timeline-time">20:00</span> Plate: potatoes base. Thigh on top. Aji verde 35g spooned around.</div>
+                </div>
+                
+                <div class="cue-box">
+                    <h4>Cues</h4>
+                    <p>Skin renders and blisters. Potatoes snap when pressed. Thigh juices clear on slice.</p>
+                </div>
+                
+                <div class="safety-box">
+                    <h4>Safety</h4>
+                    <p>Bird to 74°C (165°F) in center. Separate raw board.</p>
+                </div>
+                
+                <div class="pivot-box">
+                    <h4>B Dish Pivot</h4>
+                    <p>No potato. Use couscous 80g (⅓ cup) with 120g boiling water and 5g oil 6 minutes.</p>
+                    
+                    <h4>Thirty Minute Variant</h4>
+                    <p>As written. For 45 minutes, marinate thigh 20 minutes first for deeper flavor.</p>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>3. Crispy Skin Salmon with Brown Butter Caper Lemon and Fennel Salad</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Shattering skin. Silky butter lemon. Crunchy fennel.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Tools</h4>
+                <p>Nonstick or seasoned steel. Small pan for butter. Mandoline for fennel. Thermometer.</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Salmon center cut, skin on</span><span>180g (6.3 oz)</span></li>
+                        <li><span>Fine salt</span><span>3g (½ tsp)</span></li>
+                        <li><span>Black pepper</span><span>0.5g (⅛ tsp)</span></li>
+                        <li><span>Neutral oil</span><span>8g (1½ tsp)</span></li>
+                        <li><span>Butter</span><span>80g (5½ tbsp)</span></li>
+                        <li><span>Capers (drained)</span><span>15g (1 tbsp)</span></li>
+                        <li><span>Lemon juice</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Parsley (chopped)</span><span>10g (2 tsp)</span></li>
+                        <li><span>Fennel bulb (shaved)</span><span>80g (⅔ cup)</span></li>
+                        <li><span>Olive oil</span><span>10g (2 tsp)</span></li>
+                        <li><span>Lemon juice (for salad)</span><span>10g (2 tsp)</span></li>
+                        <li><span>Salt</span><span>1g (¼ tsp)</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Five Minute Mise</h4>
+                <ol>
+                    <li>Salt salmon skin side now. Pat dry.</li>
+                    <li>Shave fennel. Toss with 10g oil, 10g lemon, 1g salt.</li>
+                    <li>Set butter, capers, parsley, lemon measured.</li>
+                </ol>
+                
+                <h4>Thirty Minute Clock</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><span class="timeline-time">00:00</span> Pan medium high.</div>
+                    <div class="timeline-item"><span class="timeline-time">01:00</span> Film pan with 8g oil.</div>
+                    <div class="timeline-item"><span class="timeline-time">01:30</span> Salmon in, skin down. Press lightly 20 seconds to keep flat.</div>
+                    <div class="timeline-item"><span class="timeline-time">01:30</span> Make brown butter in small pan. 80g butter to hazelnut at 5:30. Off heat. Add capers then 20g lemon and parsley.</div>
+                    <div class="timeline-item"><span class="timeline-time">07:00</span> Look for skin crisp and color creep to two thirds. Flip 20-40 seconds. Remove at center 50-52°C (122-126°F). Rest 2 minutes.</div>
+                    <div class="timeline-item"><span class="timeline-time">09:00</span> Spoon some brown butter caper lemon over top.</div>
+                    <div class="timeline-item"><span class="timeline-time">10:00</span> Plate: fennel mound, salmon skin up, spoon sauce, parsley pop.</div>
+                </div>
+                
+                <div class="cue-box">
+                    <h4>Cues</h4>
+                    <p>Skin sings and releases. Flesh translucent then just opaque. Butter smells like toasted hazelnut not burnt.</p>
+                </div>
+                
+                <div class="safety-box">
+                    <h4>Safety</h4>
+                    <p>Fish board separate. Towels dry. Keep sauce away from high flame after adding lemon.</p>
+                </div>
+                
+                <div class="pivot-box">
+                    <h4>B Dish Pivot</h4>
+                    <p>Skin tore. Serve flesh side up. Add herbed panko 20g (1½ tbsp) toasted in butter to bring crunch.</p>
+                    
+                    <h4>Thirty Minute Variant</h4>
+                    <p>As written. For 45 minutes, add a quick potato or charred broccoli side.</p>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>4. Seared Scallops with Spiced Yogurt, Beet, and Chanterelle</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Sweet sear. Cool tang. Earthy and nutty garnish.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Dry scallops (6 large)</span><span>240g (8.5 oz)</span></li>
+                        <li><span>Fine salt</span><span>3g (½ tsp)</span></li>
+                        <li><span>Neutral oil</span><span>10g (2 tsp)</span></li>
+                        <li><span>Yogurt</span><span>120g (½ cup)</span></li>
+                        <li><span>Lemon juice</span><span>10g (2 tsp)</span></li>
+                        <li><span>Ground cumin</span><span>1g (¼ tsp)</span></li>
+                        <li><span>Roasted beet (1cm dice)</span><span>120g (½ cup)</span></li>
+                        <li><span>Chanterelles (torn)</span><span>80g (⅔ cup)</span></li>
+                        <li><span>Butter</span><span>10g (2 tsp)</span></li>
+                        <li><span>Chive (minced)</span><span>5g (1 tsp)</span></li>
+                        <li><span>Black pepper</span><span>0.5g (⅛ tsp)</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Thirty Minute Clock</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><span class="timeline-time">00:00</span> Heat cast iron to high.</div>
+                    <div class="timeline-item"><span class="timeline-time">02:00</span> Add 10g oil.</div>
+                    <div class="timeline-item"><span class="timeline-time">02:15</span> Scallops in. Do not crowd. Press gently 10 seconds.</div>
+                    <div class="timeline-item"><span class="timeline-time">03:45</span> Flip. 45-60 seconds. Pull.</div>
+                    <div class="timeline-item"><span class="timeline-time">04:00</span> Saute chanterelles in 10g butter 2 minutes. Salt a pinch.</div>
+                    <div class="timeline-item"><span class="timeline-time">06:30</span> Plate: yogurt swipe 60g. Beets scattered. Scallops on top. Mushrooms around. Chive and pepper.</div>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>5. Pork Chop with Apple Mustard and Charred Cabbage</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Juicy pork. Sweet heat glaze. Bitter char for balance.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Pork chop (3cm thick)</span><span>280g (10 oz)</span></li>
+                        <li><span>Fine salt</span><span>4g (¾ tsp)</span></li>
+                        <li><span>Black pepper</span><span>1g (¼ tsp)</span></li>
+                        <li><span>Neutral oil</span><span>10g (2 tsp)</span></li>
+                        <li><span>Cabbage (wedges)</span><span>150g (⅔ cup)</span></li>
+                        <li><span>Apple (small dice)</span><span>120g (½ cup)</span></li>
+                        <li><span>Dijon mustard</span><span>15g (1 tbsp)</span></li>
+                        <li><span>Butter</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Apple cider vinegar</span><span>8g (1½ tsp)</span></li>
+                        <li><span>Sugar</span><span>4g (1 tsp)</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Safety</h4>
+                <p>Pork safe at 63°C (145°F) after rest. Clean knife for slicing.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>6. Lamb Chops with Cherry Wine Reduction and Herb Crumb</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Savory lamb. Syrupy cherry gloss. Fresh crunch.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Lamb chops (2 pieces)</span><span>260g (9.2 oz)</span></li>
+                        <li><span>Dry red wine</span><span>100g (½ cup)</span></li>
+                        <li><span>Cherry jam</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Panko</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Parsley (chopped)</span><span>5g (1 tsp)</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>7. Shrimp a la Plancha with Corn Lime Slaw and Chili Oil</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Fast sear. Sweet corn crunch. Citrus lift.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Shrimp (peeled, deveined)</span><span>220g (7.8 oz)</span></li>
+                        <li><span>Corn</span><span>120g (½ cup)</span></li>
+                        <li><span>Cabbage (thin shred)</span><span>80g (⅔ cup)</span></li>
+                        <li><span>Lime juice</span><span>12g (2½ tsp)</span></li>
+                        <li><span>Chili flake</span><span>2g (½ tsp)</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>8. Halibut en Papillote with Herb Yogurt and Warm Tomato</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Gentle steam. Pure fish flavor. Soft acidic finish.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Halibut</span><span>180g (6.3 oz)</span></li>
+                        <li><span>Yogurt</span><span>100g (½ cup)</span></li>
+                        <li><span>Cherry tomatoes (halved)</span><span>120g (½ cup)</span></li>
+                        <li><span>Dill (chopped)</span><span>7g (1½ tsp)</span></li>
+                        <li><span>Capers</span><span>10g (2 tsp)</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>9. Steak and Hominy "Risotto" with Aji Amarillo and Herb Oil</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Comfort texture. Steak savor. Electric yellow heat.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Sirloin</span><span>260g (9.2 oz)</span></li>
+                        <li><span>Hominy (drained, chopped)</span><span>300g (1¼ cups)</span></li>
+                        <li><span>Aji amarillo paste</span><span>10g (2 tsp)</span></li>
+                        <li><span>Parmesan (grated)</span><span>20g (1½ tbsp)</span></li>
+                        <li><span>Herb oil: parsley with olive oil</span><span>10g (2 tsp)</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="alarm-schedule">
+                <h3>⏰ ONE MINUTE ALARM SCHEDULE FOR EVERY DISH ⏰</h3>
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 10</span>
+                    <span>Kill a side if behind</span>
+                </div>
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 5</span>
+                    <span>Confirm acid and crunch on plate</span>
+                </div>
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 3</span>
+                    <span>Protein sliced or ready</span>
+                </div>
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 1</span>
+                    <span>Wipe the rim. Announce intent</span>
+                </div>
+            </div>
+            
+            <div class="quick-ref-card">
+                <h3>Temperature Targets (Pull Temps Before Rest)</h3>
+                <ul>
+                    <li><strong>Ribeye/Sirloin:</strong> Pull 50-52°C (122-126°F) for medium rare</li>
+                    <li><strong>Pork:</strong> Pull 60°C (140°F), rests to 63°C (145°F)</li>
+                    <li><strong>Lamb:</strong> Pull 52-54°C (125-130°F)</li>
+                    <li><strong>Chicken:</strong> 74°C (165°F)</li>
+                    <li><strong>Salmon:</strong> 50-52°C (122-126°F) for competition texture</li>
+                    <li><strong>White Fish (Cod/Halibut):</strong> 52-54°C (125-130°F)</li>
+                    <li><strong>Scallops:</strong> Slight translucence in center</li>
+                    <li><strong>Shrimp:</strong> C shape and pearly (2 minutes total)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="vegetarian" class="tab-content">
+            <h2>Vegetarian & Plant-Based Dishes (Recipes 10-18)</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search vegetarian dishes..." onkeyup="searchRecipes('vegetarian')">
+            </div>
+            
+            <div class="recipe-card">
+                <h3>10. Pressure Garbanzos with Burnt Scallion Oil and Citrus Pickle</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Creamy warm chickpea puree with crackly chickpeas, smoky scallion oil, bright citrus.</p>
+                <p><strong>Why it wins:</strong> Big flavor from pantry items. Texture contrast. Plates clean.</p>
+                <p><strong>Yield:</strong> 1 large bowl or 2 small plates</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Canned garbanzo beans (drained)</span><span>400g</span></li>
+                        <li><span>Scallions (trimmed)</span><span>50g</span></li>
+                        <li><span>Neutral oil</span><span>40g</span></li>
+                        <li><span>Garlic (sliced)</span><span>2g</span></li>
+                        <li><span>Lemon juice plus zest</span><span>12g + 1g</span></li>
+                        <li><span>Chili flake</span><span>1g</span></li>
+                        <li><span>Greek yogurt (optional)</span><span>60g</span></li>
+                        <li><span>Fine salt</span><span>5g total</span></li>
+                        <li><span>Water for puree texture</span><span>60-100g</span></li>
+                        <li><span>Olive oil for finishing</span><span>10g</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Thirty Minute Clock</h4>
+                <div class="timeline">
+                    <div class="timeline-item"><span class="timeline-time">00:00</span> Skillet medium high. Add 15g neutral oil.</div>
+                    <div class="timeline-item"><span class="timeline-time">00:30</span> Add 200g chickpeas for crisping. Salt 1g. Shake occasionally 8-10 minutes until blistered.</div>
+                    <div class="timeline-item"><span class="timeline-time">01:00</span> Small pot medium. Add 25g neutral oil. Add scallions and garlic. Cook until deeply charred at edges 3-4 minutes.</div>
+                    <div class="timeline-item"><span class="timeline-time">02:00</span> Puree base: blend 200g chickpeas, water 60g, yogurt 60g, lemon juice 12g, olive oil 10g, salt 2g.</div>
+                    <div class="timeline-item"><span class="timeline-time">10:00</span> Taste puree. Adjust salt 0.5-1g.</div>
+                    <div class="timeline-item"><span class="timeline-time">12:00</span> Bowl build: spread 180-220g puree. Top with hot crispy chickpeas. Spoon 15-20g burnt scallion oil.</div>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>11. Crispy Tofu with Soy Citrus Glaze and Sesame Slaw</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Shattering tofu crust. Sticky citrus soy. Fresh crunchy slaw.</p>
+                <p><strong>Why it wins:</strong> Plant based plate with speed and punch.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Firm tofu (pressed)</span><span>240g</span></li>
+                        <li><span>Corn starch</span><span>15g</span></li>
+                        <li><span>Soy sauce</span><span>25g</span></li>
+                        <li><span>Orange juice</span><span>20g</span></li>
+                        <li><span>Honey</span><span>10g</span></li>
+                        <li><span>Rice vinegar</span><span>6g</span></li>
+                        <li><span>Cabbage (thin shred)</span><span>120g</span></li>
+                        <li><span>Sesame seeds (toasted)</span><span>5g</span></li>
+                        <li><span>Sesame oil</span><span>5g</span></li>
+                        <li><span>Lime juice</span><span>8g</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>12. Mushroom Steak with Black Garlic Miso Butter and Quick Polenta</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Meaty mushrooms. Umami butter. Creamy polenta.</p>
+                <p><strong>Why it wins:</strong> Vegetarian steak experience with strong sauce and texture.</p>
+                <p><strong>Yield:</strong> 1 plate</p>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>King oyster mushrooms (split)</span><span>240g</span></li>
+                        <li><span>Black garlic (mashed)</span><span>10g</span></li>
+                        <li><span>White miso</span><span>10g</span></li>
+                        <li><span>Quick polenta (dry)</span><span>80g</span></li>
+                        <li><span>Stock or water</span><span>300g+</span></li>
+                        <li><span>Parmesan (optional)</span><span>20g</span></li>
+                        <li><span>Butter</span><span>30g</span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>13. Pork Carnitas Crisp with Tomatillo Salsa and Radish Slaw</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Fast pressure carnitas then crisp. Fresh salsa. Sharp radish.</p>
+                <p><strong>Why it wins:</strong> Big pork flavor with brightness and crunch.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>14. Pan Roast Cod with Miso Chimichurri and Charred Broccoli</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Clean white fish. Herb umami hit. Bitter char for balance.</p>
+                <p><strong>Why it wins:</strong> Forgiving firm fish. High contrast.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>15. Chicken Thigh Yakitori Glaze with Sesame Rice and Cucumber</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Lacquered thigh. Savory sweet tare. Cool cucumber.</p>
+                <p><strong>Why it wins:</strong> Familiar flavor, high shine, low risk.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>16. Scallop Crudo with Citrus Chili and Crunchy Quinoa</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Cold, clean, bright. Delicate heat and crunch.</p>
+                <p><strong>Why it wins:</strong> No cook main element. Razor sharp seasoning.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>17. Fast Short Rib Burger with Wojapi Berry Sauce and Pickled Onion</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Rich beef, bright berry, sharp onion.</p>
+                <p><strong>Why it wins:</strong> Comfort lane with a sharp, original sauce.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>18. Pork and Hominy "Pozole Express" Bowl</h3>
+                <p class="recipe-identity"><strong>Identity:</strong> Warm savory bowl. Pork crisp bits. Hominy body.</p>
+                <p><strong>Why it wins:</strong> Uses your hominy lane and gives a hearty one bowl plate in television time.</p>
+            </div>
+        </div>
+        
+        <div id="specialty" class="tab-content">
+            <h2>Specialty Dishes</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search specialty dishes..." onkeyup="searchRecipes('specialty')">
+            </div>
+            
+            <div class="recipe-card">
+                <h3>Littleneck Clams en Papillote - Aromatic Steam with Buttered Jus</h3>
+                
+                <h4>Ingredients</h4>
+                <div class="ingredients-list">
+                    <ul>
+                        <li><span>Littleneck clams (scrubbed)</span><span>12-16</span></li>
+                        <li><span>Shallot (fine dice)</span><span>1 small</span></li>
+                        <li><span>Garlic (sliced)</span><span>2 cloves</span></li>
+                        <li><span>Fennel (very thin slices)</span><span>½ bulb</span></li>
+                        <li><span>Cherry tomatoes (halved)</span><span>6</span></li>
+                        <li><span>Chili flake</span><span>pinch</span></li>
+                        <li><span>Lemon zest strips and juice</span><span>1 tsp</span></li>
+                        <li><span>White wine or fish stock</span><span>¼ cup</span></li>
+                        <li><span>Butter (divided)</span><span>3 tbsp</span></li>
+                        <li><span>Parsley, chervil, or fennel fronds</span><span>2 tbsp</span></li>
+                        <li><span>Optional white miso</span><span>1 tsp</span></li>
+                    </ul>
+                </div>
+                
+                <h4>Packet Build</h4>
+                <ol>
+                    <li>Cut a large parchment heart. Lightly butter the center.</li>
+                    <li>Layer fennel, tomatoes, shallot, garlic. Scatter chili flake and zest. Dot with 1 tbsp butter.</li>
+                    <li>Pile clams on top. Splash wine or stock. If using miso, whisk it into the liquid first. Add a pinch of salt.</li>
+                    <li>Fold the parchment closed from the top of the heart and crimp all along the edge to seal tight.</li>
+                </ol>
+                
+                <h4>Cook</h4>
+                <p><strong>Oven route:</strong> 450°F. Sheet tray preheated. Packet on tray 8-10 minutes until clams open.</p>
+                <p><strong>Stove route:</strong> Use a hot sheet tray or skillet as a base. Packet on top. Invert a metal bowl over to trap heat. Same timing.</p>
+                
+                <h4>Finish and Sauce</h4>
+                <p>Tear the packet at table side for aroma. Pour the juices into a small pan. Whisk in 2 tbsp cold butter off heat and a squeeze of lemon to make a glossy jus. Toss clams with herbs. Spoon jus back over.</p>
+                
+                <h4>Plating</h4>
+                <p>Shallow bowl. Nest the clams and aromatics. Ladle extra jus around. Add fennel fronds for height. Serve bread or crisp potatoes on the rim if you have them.</p>
+                
+                <h4>Speed Swaps</h4>
+                <ul>
+                    <li>No wine: Use water plus lemon and a touch of miso.</li>
+                    <li>No fennel: Use thin leek or celery.</li>
+                </ul>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>Blackened Grouper with Pan Butter Sauce</h3>
+                <p>Pair with clams for a complete seafood presentation in 20 minutes!</p>
+                
+                <h4>Pro Details That Score</h4>
+                <ul>
+                    <li><strong>Seasoning:</strong> Salt the fish directly before the butter and spice coat. The spice carries salt but the fish still needs direct seasoning.</li>
+                    <li><strong>Heat control:</strong> You want smoke wisps before the fish goes down. That is the crust insurance.</li>
+                    <li><strong>Internal temp:</strong> Probe from the side to the center and pull at 125-130°F. Rest 2 minutes.</li>
+                    <li><strong>Texture contrast:</strong> Keep the grouper crust dry. Put liquid around it. The clams deliver brine and sweetness without soaking the crust.</li>
+                    <li><strong>Acid:</strong> Fresh lemon at the end on both dishes. Sauce acid lives in the pan. Finishing acid lives on the plate.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="sauces" class="tab-content">
+            <h2>Complete Sauce Library</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search sauces..." onkeyup="searchRecipes('sauces')">
+            </div>
+            
+            <div class="sauce-card">
+                <h4>1. Aji Verde Blender Sauce</h4>
+                <p><strong>Profile:</strong> Bright, creamy, herbaceous. Great on beef, chicken, and veg.</p>
+                
+                <div class="sauce-ingredients">
+                    <ul>
+                        <li>Cilantro leaves - 30g (2 tbsp)</li>
+                        <li>Jalapeño (seeded or not to taste) - 15g (1 tbsp)</li>
+                        <li>Garlic - 5g (1 tsp)</li>
+                        <li>Lime juice - 25g (1½ tbsp)</li>
+                        <li>Mayonnaise - 80g (⅓ cup) or Greek yogurt 100g</li>
+                        <li>Olive oil - 20g (1½ tbsp)</li>
+                        <li>Fine salt - 3g (½ tsp)</li>
+                        <li>Optional aji amarillo paste - 5g (1 tsp) for fruit heat</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Make Sequence:</strong></p>
+                <ol>
+                    <li>0-1 minute: Load blender with wet items under blades, herbs on top</li>
+                    <li>1-2 minute: Blend on high until smooth and slightly thick</li>
+                    <li>2-3 minute: Taste then add 1-2g salt or 3-5g lime if needed</li>
+                </ol>
+                
+                <p><strong>Cues:</strong> Color should be vivid green, texture should coat a spoon lightly</p>
+                <p><strong>Storage:</strong> Covered in fridge 4 days</p>
+                <p><strong>Fail Points and Fixes:</strong> Bitter taste from over blending stems.</p>
+            </div>
+        </div>
+        
+        <div id="sides" class="tab-content">
+            <h2>Sides & Accompaniments</h2>
+             <p>Content coming soon!</p>
+        </div>
+        
+        <div id="quick-breads" class="tab-content">
+             <h2>Quick Breads & Doughs</h2>
+             <p>Content coming soon!</p>
+        </div>
+        
+        <div id="pickles" class="tab-content">
+             <h2>Elite Pickle System</h2>
+             <p>Content coming soon!</p>
+        </div>
+
+        <div id="techniques" class="tab-content">
+            <h2>Professional Techniques & Execution</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search techniques..." onkeyup="searchRecipes('techniques')">
+            </div>
+            
+            <div class="technique-grid">
+                <div class="technique-card">
+                    <h3>Salmon Seasoning Guide</h3>
+                    
+                    <h4>Seasoning That Actually Sticks</h4>
+                    <ol>
+                        <li><strong>Pre salt:</strong> Pat the fillet bone dry. Salt both skin and flesh lightly and evenly. Let it sit 10-20 minutes at room temp. You will see beads of moisture rise.</li>
+                        <li><strong>Dab, do not wipe:</strong> Gently dab the beads with a towel. Do not scrub off the salt. If you already wiped hard, reapply a whisper of salt to the flesh side only.</li>
+                        <li><strong>Layer the salt:</strong> Add a tiny pinch of fine salt into your basting glaze and finish with a few flakes of salt on the flesh side at the pass. Three light touches beat one heavy one.</li>
+                    </ol>
+                    
+                    <h4>Make the Honey Garlic Butter Punch</h4>
+                    <p>Your first version was likely too sweet and too mild. Add umami, acid, and a pinch of heat.</p>
+                    
+                    <p><strong>Quick Pan Glaze:</strong></p>
+                    <ul>
+                        <li>2 tsp honey</li>
+                        <li>1 small garlic clove, microplaned</li>
+                        <li>1 tsp soy or tamari</li>
+                        <li>1 tsp white miso</li>
+                        <li>1 tsp lemon juice or rice vinegar</li>
+                        <li>1 tbsp cold butter, cut in cubes</li>
+                        <li>Optional pinch chili flake or black pepper</li>
+                    </ul>
+                    
+                    <p>Reduce honey, garlic, soy, and miso over medium heat until syrupy and big slow bubbles form. Pull off heat, whisk in lemon, then mount the cold butter to make it glossy. Taste. It should read sweet, salty, garlicky, bright.</p>
+                    
+                    <p>Brush this only on the flesh side after cooking. Do not put it on the skin.</p>
+                    
+                    <h4>Sear and Baste Timeline</h4>
+                    <ol>
+                        <li>Pan medium heat with a thin film of neutral oil.</li>
+                        <li>Skin side down. Press gently with a fish spatula for 30-40 seconds so it stays flat.</li>
+                        <li>Cook skin side down until you see the doneness climb to about ⅘ up the side. Tilt the pan and baste the flesh side with plain foaming butter for 30-45 seconds.</li>
+                        <li>Kiss the flesh side on the pan for 15-30 seconds or finish in a low oven if thick.</li>
+                        <li>Rest the fish on a wire rack while you make the glaze. Brush glaze on the flesh side only.</li>
+                    </ol>
+                    
+                    <h4>Where the Sauce Goes</h4>
+                    <ul>
+                        <li><strong>Underpaint:</strong> Spoon or swoosh a small pool of sauce on the plate. Set the fish skin up on top so only flesh touches sauce.</li>
+                        <li><strong>Around, not on:</strong> Dot or nappe the sauce around the fish.</li>
+                        <li><strong>Brush finish:</strong> Brush the glaze on the flesh right before you walk. Skin stays dry.</li>
+                    </ul>
+                    
+                    <h4>Flavor Boosters That Play Great with Wild Alaskan Salmon</h4>
+                    <p>Pick one to add to the glaze or as a side relish. Small amounts go a long way.</p>
+                    <ul>
+                        <li>A few drops of fish sauce to deepen savor</li>
+                        <li>Lemon zest added off heat for lift</li>
+                        <li>Grated fresh ginger for warmth</li>
+                        <li>A spoon of chopped dill and chive folded in at the end</li>
+                        <li>Tiny caper and toasted panko sprinkle on the plate, not on the skin</li>
+                    </ul>
+                    
+                    <h4>Ramsay Grade Plating</h4>
+                    <ol>
+                        <li>Warm plate. Swipe a small sauce base.</li>
+                        <li>Fish goes skin up, slightly off center.</li>
+                        <li>Brush glaze on flesh side.</li>
+                        <li>Add a small bright element for contrast on the side, for example a lemon dressed herb salad or a few pickled shallots.</li>
+                        <li>Finish with flake salt on the flesh side and one last micro swipe of lemon zest in the air.</li>
+                    </ol>
+                    
+                    <h4>Quick Checklist for the Next Rep</h4>
+                    <ul>
+                        <li>Salt early. Dab moisture, do not wipe away seasoning.</li>
+                        <li>Keep the skin completely dry from the moment it goes in the pan to the moment it hits the pass.</li>
+                        <li>Put salt in the glaze. Brush the flesh only.</li>
+                        <li>Sauce under or around. Never on the skin.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="conversions" class="tab-content">
+            <h2>Complete Measurement Conversions</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search conversions..." onkeyup="searchRecipes('conversions')">
+            </div>
+            
+            <table class="conversion-table">
+                <thead>
+                    <tr>
+                        <th>Grams</th>
+                        <th>Volume Conversion</th>
+                        <th>Common Ingredient</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>5g</td>
+                        <td>1 tsp</td>
+                        <td>Salt, spices, baking powder</td>
+                    </tr>
+                    <tr>
+                        <td>10g</td>
+                        <td>2 tsp</td>
+                        <td>Oil, vinegar, honey</td>
+                    </tr>
+                    <tr>
+                        <td>15g</td>
+                        <td>1 tbsp</td>
+                        <td>Butter, mayo, mustard</td>
+                    </tr>
+                    <tr>
+                        <td>20g</td>
+                        <td>1½ tbsp</td>
+                        <td>Jam, paste, thick sauces</td>
+                    </tr>
+                    <tr>
+                        <td>25g</td>
+                        <td>1½ tbsp</td>
+                        <td>Liquid ingredients</td>
+                    </tr>
+                    <tr>
+                        <td>30g</td>
+                        <td>2 tbsp</td>
+                        <td>Chopped herbs, grated cheese</td>
+                    </tr>
+                    <tr>
+                        <td>40g</td>
+                        <td>2½ tbsp / ⅙ cup</td>
+                        <td>Small amounts of liquid</td>
+                    </tr>
+                    <tr>
+                        <td>60g</td>
+                        <td>¼ cup</td>
+                        <td>Diced vegetables, nuts</td>
+                    </tr>
+                    <tr>
+                        <td>80g</td>
+                        <td>⅓ cup</td>
+                        <td>Couscous, rice (dry)</td>
+                    </tr>
+                    <tr>
+                        <td>100g</td>
+                        <td>½ cup minus 1 tbsp</td>
+                        <td>Chopped vegetables</td>
+                    </tr>
+                    <tr>
+                        <td>120g</td>
+                        <td>½ cup</td>
+                        <td>Yogurt, chopped vegetables</td>
+                    </tr>
+                    <tr>
+                        <td>150g</td>
+                        <td>⅔ cup</td>
+                        <td>Wine, stock, larger vegetables</td>
+                    </tr>
+                    <tr>
+                        <td>180g</td>
+                        <td>¾ cup</td>
+                        <td>Tomatoes, beans</td>
+                    </tr>
+                    <tr>
+                        <td>200g</td>
+                        <td>¾ cup + 2 tbsp</td>
+                        <td>Stock, larger amounts</td>
+                    </tr>
+                    <tr>
+                        <td>240g</td>
+                        <td>1 cup</td>
+                        <td>Flour, sugar, liquids</td>
+                    </tr>
+                    <tr>
+                        <td>300g</td>
+                        <td>1¼ cups</td>
+                        <td>Hominy, beans</td>
+                    </tr>
+                    <tr>
+                        <td>400g</td>
+                        <td>14 oz / 1⅔ cups</td>
+                        <td>Canned goods</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Protein Weight Conversions</h3>
+            <table class="conversion-table">
+                <thead>
+                    <tr>
+                        <th>Grams</th>
+                        <th>Ounces</th>
+                        <th>Typical Portion/Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>160g</td>
+                        <td>5.6 oz</td>
+                        <td>Burger patty</td>
+                    </tr>
+                    <tr>
+                        <td>180g</td>
+                        <td>6.3 oz</td>
+                        <td>Fish fillet (salmon, halibut)</td>
+                    </tr>
+                    <tr>
+                        <td>200g</td>
+                        <td>7 oz</td>
+                        <td>Cod, smaller portions</td>
+                    </tr>
+                    <tr>
+                        <td>220g</td>
+                        <td>7.8 oz</td>
+                        <td>Chicken thigh, shrimp portion</td>
+                    </tr>
+                    <tr>
+                        <td>240g</td>
+                        <td>8.5 oz</td>
+                        <td>Scallops (6 large), tofu block</td>
+                    </tr>
+                    <tr>
+                        <td>260g</td>
+                        <td>9.2 oz</td>
+                        <td>Lamb chops (2), sirloin</td>
+                    </tr>
+                    <tr>
+                        <td>280g</td>
+                        <td>10 oz</td>
+                        <td>Pork chop, smaller ribeye</td>
+                    </tr>
+                    <tr>
+                        <td>300g</td>
+                        <td>10.6 oz</td>
+                        <td>Pork shoulder portions</td>
+                    </tr>
+                    <tr>
+                        <td>320g</td>
+                        <td>11.3 oz</td>
+                        <td>Large ribeye</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="quick-ref-card">
+                <h3>Essential Ratios</h3>
+                <ul>
+                    <li><strong>Salt to meat:</strong> 1.5-2% by weight (5-6g per 300g protein = 1-1¼ tsp per 10 oz)</li>
+                    <li><strong>Brine strength:</strong> 2.5% salt by weight of liquid</li>
+                    <li><strong>Sauce to plate:</strong> 30-45g (2-3 tbsp) per portion</li>
+                    <li><strong>Herb oil:</strong> 1:3 ratio herbs to oil</li>
+                    <li><strong>Vinaigrette:</strong> 1:3 acid to oil</li>
+                    <li><strong>Pickle brine:</strong> 50/50 vinegar to water base</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="timing" class="tab-content">
+            <h2>Competition Timing & Critical Alarms</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search timing info..." onkeyup="searchRecipes('timing')">
+            </div>
+            
+            <div class="alarm-schedule">
+                <h3>⏰ ONE MINUTE ALARM SCHEDULE FOR EVERY DISH ⏰</h3>
+                
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 20</span>
+                    <span>Initial check - assess progress, adjust heat if needed</span>
+                </div>
+                
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 15</span>
+                    <span>Protein should be cooking or about to start</span>
+                </div>
+                
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 10</span>
+                    <span>CRITICAL - Kill a side if behind</span>
+                </div>
+                
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 5</span>
+                    <span>Confirm acid and crunch elements are ready</span>
+                </div>
+                
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 3</span>
+                    <span>Protein sliced or ready to plate</span>
+                </div>
+                
+                <div class="alarm-item">
+                    <span class="alarm-time">Minute 1</span>
+                    <span>Wipe the rim. Announce intent</span>
+                </div>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>Food Safety and Sanitation Anchors</h3>
+                <ul>
+                    <li>Raw zone on a tray. Clean board for cooked slicing.</li>
+                    <li>Fresh tasting spoon each taste.</li>
+                    <li>Rest beef 5-8 minutes. Rest pork 6 minutes. Rest chicken 3 minutes.</li>
+                    <li>Fish towels bone dry before going to the pan.</li>
+                </ul>
+            </div>
+            
+            <div class="quick-ref-card">
+                <h3>Temperature Targets (Pull Temps Before Rest)</h3>
+                <ul>
+                    <li><strong>Ribeye/Sirloin:</strong> Pull 50-52°C (122-126°F) for medium rare</li>
+                    <li><strong>Pork:</strong> Pull 60°C (140°F), rests to 63°C (145°F)</li>
+                    <li><strong>Lamb:</strong> Pull 52-54°C (125-130°F)</li>
+                    <li><strong>Chicken:</strong> 74°C (165°F) - no rest needed for safety</li>
+                    <li><strong>Salmon:</strong> 50-52°C (122-126°F) for competition texture</li>
+                    <li><strong>White Fish (Cod/Halibut):</strong> 52-54°C (125-130°F)</li>
+                    <li><strong>Scallops:</strong> Slight translucence in center</li>
+                    <li><strong>Shrimp:</strong> C shape and pearly (2 minutes total)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="blindspots" class="tab-content">
+            <h2>The Big Blind Spots and How to Close Them</h2>
+            
+            <div class="search-box">
+                <input type="text" placeholder="Search blind spots..." onkeyup="searchRecipes('blindspots')">
+            </div>
+            
+            <div class="recipe-card">
+                <h3>1. Sauce Range Beyond Cream and Pan Reductions</h3>
+                <p><strong>Why it matters:</strong> In auditions many plates die from dryness or one note richness. Judges reward moisture and clarity with contrast.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li><strong>Beurre monté in 60 seconds:</strong> Splash of water to a simmer. Whisk in cold butter to a silky emulsion. Finish with lemon and cracked pepper.</li>
+                    <li><strong>Blender mayo or aioli in 90 seconds:</strong> Yolk plus acid plus salt, then stream oil. Flavor with garlic or herbs.</li>
+                    <li><strong>Salsa verde in 120 seconds:</strong> Fine chop herbs plus garlic plus acid plus oil plus salt.</li>
+                    <li><strong>Gastrique in 3-4 minutes:</strong> Reduce vinegar with a touch of sweet if available on the platform, mount with butter.</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Three sauces in six minutes. Start a timer and produce beurre monté, salsa verde, and a quick peppercorn cream. Taste and write one line on what you would fix.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>2. Fast Acid Work and Brightness on Command</h3>
+                <p><strong>Why it matters:</strong> Acid is the easiest way to create a professional finish under twenty minutes.</p>
+                <p><strong>Build this:</strong> Always grab one acid and one herb. Make micro pickles when sugar appears. If no sugar, use salt and vinegar only.</p>
+                <p><strong>Drill:</strong> Four minute acid sprint. Make lemon segments, a grated zest salt, a flash pickle of shaved veg, and a pan deglaze with vinegar. Plate each with a spoon of plain yogurt or cream to feel the balance.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>3. Vegetable Command Under Ten Minutes</h3>
+                <p><strong>Why it matters:</strong> Veg is where many plates lose time and texture.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li><strong>Quick puree:</strong> Simmer veg in cream and salt five minutes. Blend hard. Mount butter.</li>
+                    <li><strong>Char and steam:</strong> Sear cut veg two minutes, splash water, cover two minutes, finish open one minute with oil and acid.</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> One veg two ways in eight minutes. Same vegetable as a puree and a char plus steam side. Plate both with your protein of the day.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>4. Crisp Plus Creamy Plus Fresh Texture Triangle</h3>
+                <p><strong>Why it matters:</strong> Contrast sells speed cooking as intention, not compromise.</p>
+                <p><strong>Build this:</strong> Every plate should hit a triangle. One crunch, one creamy or saucy element, one fresh bite.</p>
+                <p><strong>Drill:</strong> Run any protein with toasted crumb or nut, a spoon sauce, and a raw herb salad or shaved veg.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>5. Knife Speed and Accuracy for Even Cooking</h3>
+                <p><strong>Why it matters:</strong> Uneven cuts force you to choose between under and over.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li>Chicken tender butterfly in ten seconds</li>
+                    <li>Onion small dice 1 cup in ninety seconds</li>
+                    <li>Pepper julienne in sixty seconds</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Ten minute cut test. Film yourself. Score for speed and uniformity. Repeat twice weekly until times fall by twenty percent.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>6. Fish and Odd Part Readiness</h3>
+                <p><strong>Why it matters:</strong> The platform loves collars, heads, and skin on fillets.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li>Halibut or salmon collar cleanup and roast in twelve minutes</li>
+                    <li>Cheeks off a head and pan roast in eight minutes</li>
+                    <li>Pin bone removal with tweezers in sixty seconds</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Buy one whole fish or a head and practice cheeks plus collar start to finish in fifteen minutes with a lemon butter finish.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>7. Plan B and Plan C Thinking When the Grab Goes Sideways</h3>
+                <p><strong>Why it matters:</strong> You will not always get the protein you want.</p>
+                <p><strong>Build this:</strong> Write a two line plan for each protein group that uses the same sauce and veg technique. Example: scallops sear or chicken cutlet shallow fry, both finish with lemon caper butter and charred peppers.</p>
+                <p><strong>Drill:</strong> Blind bag platform. Put five slips in a bowl. Draw one protein and two veg. Start a twenty minute timer and cook without changing your station layout script.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>8. The First Ninety Seconds of Station Setup</h3>
+                <p><strong>Why it matters:</strong> Early heat and layout decide your ceiling.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li>Pan on and heating at second thirty</li>
+                    <li>Sheet tray into any oven at minute one</li>
+                    <li>Cutting board anchored and trash bowl placed</li>
+                    <li>Salt, acid, oil, and tasting spoon within one reach</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Dry run setup three times in a row. No food. Hit the same layout each time in under ninety seconds.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>9. Plating Speed and Composition</h3>
+                <p><strong>Why it matters:</strong> Rushed plates read messy on camera and to judges.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li>Sauce under protein or gloss on top, not both</li>
+                    <li>Odd numbers of small items</li>
+                    <li>One fresh green for life and scent</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Ninety second plating test. Give yourself a white plate, a squeeze bottle, and a spoon. Plate three ways. Choose the cleanest and take a photo. Repeat daily for one week.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>10. On Camera Narration While You Work</h3>
+                <p><strong>Why it matters:</strong> Mentors and judges want to hear a plan and progress. It also steadies your mind under pressure.</p>
+                <p><strong>Build this:</strong> A fifteen second script you can say while moving.</p>
+                <p><strong>Template:</strong> "I grabbed salmon, peppers, and lemon. I am searing to medium, making lemon butter, charring peppers, and finishing with herb and toasted crumb. I will plate sauce under for moisture and sheen."</p>
+                <p><strong>Drill:</strong> Narrate the plan out loud at minutes zero, ten, and eighteen in every practice cook.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>11. Dessert Contingency When a Dessert Brief Appears</h3>
+                <p><strong>Why it matters:</strong> You have focused on savory. A quick sweet can protect you if the challenge tilts that way.</p>
+                
+                <h4>Build This If Sugar Appears:</h4>
+                <ul>
+                    <li>Crepe batter in two minutes and one pan cook</li>
+                    <li>Caramelized fruit in butter with acid and herb</li>
+                    <li>Whipped cream or sabayon in three to five minutes</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Eight minute dessert. One pan crepes or butter roasted fruit with a flavored cream and a crumb.</p>
+            </div>
+            
+            <div class="recipe-card">
+                <h3>12. Seasoning Math and Tasting Cadence</h3>
+                <p><strong>Why it matters:</strong> Under time stress most cooks under season and forget the final acid.</p>
+                
+                <h4>Build This:</h4>
+                <ul>
+                    <li>Salt benchmarks. Soup or puree likes about 6g per liter (1¼ tsp per liter) start point, then adjust.</li>
+                    <li>Taste three times. After sear, after reduction, at pass.</li>
+                </ul>
+                
+                <p><strong>Drill:</strong> Make a base puree. Split into three bowls. Season one for salt only, one for salt and acid, one for salt, acid, and butter. Taste them back to back to lock in the finish you want.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Shows the specified tab and hides all others.
+         * Also updates the active state of the tab buttons.
+         * @param {string} tabId The ID of the tab content to display.
+         */
+        function showTab(tabId) {
+            // Get all elements with class="tab-content" and hide them
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+
+            // Get all elements with class="tab-button" and remove the "active" class
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove('active');
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find the button that corresponds to the clicked tab and add the active class
+            for (let i = 0; i < tabButtons.length; i++) {
+                if (tabButtons[i].getAttribute('onclick') === `showTab('${tabId}')`) {
+                    tabButtons[i].classList.add('active');
+                }
+            }
+        }
+
+        /**
+         * Filters the content within a specific tab based on user input.
+         * @param {string} tabId The ID of the tab content to search within.
+         */
+        function searchRecipes(tabId) {
+            // Declare variables
+            let input, filter, tab, itemsToSearch, item, i, txtValue;
+            
+            const searchBox = document.querySelector(`#${tabId} .search-box`);
+            if (!searchBox) return; // Exit if no search box in this tab
+
+            input = searchBox.querySelector('input');
+            filter = input.value.toLowerCase();
+            tab = document.getElementById(tabId);
+            
+            // Define the searchable items for different tabs
+            let selector = '.recipe-card, .technique-card, .sauce-card, .alarm-item, .conversion-table tbody tr';
+            itemsToSearch = tab.querySelectorAll(selector);
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < itemsToSearch.length; i++) {
+                item = itemsToSearch[i];
+                txtValue = item.textContent || item.innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    item.style.display = "";
+                } else {
+                    item.style.display = "none";
+                }
+            }
+        }
+
+        // Ensure the first tab is displayed correctly on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // The HTML already sets the first tab to active, so no initial call is needed.
+            // If it didn't, we would call: showTab('main-dishes');
+        });
+    </script>
+
+</body>
+</html>
