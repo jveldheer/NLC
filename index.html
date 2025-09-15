@@ -65,6 +65,34 @@
             opacity: 0.95;
         }
         
+        .overview-section {
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+         .overview-section h2 {
+            text-align: center;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .overview-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+         .overview-card h3 {
+            color: #495057;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 5px;
+        }
+
         .tabs {
             display: flex;
             background: #f8f9fa;
@@ -440,6 +468,24 @@
             <p>Complete Resource with 30-Minute Competition Recipes & Pro Techniques!</p>
         </div>
         
+        <div class="overview-section">
+            <h2>The Competition Format: An Overview</h2>
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <h3>The Three Kitchens</h3>
+                    <p>The competition cycles through three distinct kitchen setups: a "basement" with poor equipment, a "middle" standard commercial kitchen, and a "top-level" Michelin-starred kitchen with the best tools and ingredients.</p>
+                </div>
+                <div class="overview-card">
+                    <h3>The Ingredient Elevator</h3>
+                    <p>Ingredients are selected from a platform that descends from the top kitchen to the basement. Chefs at the top get first pick, leaving fewer and often less desirable ingredients for those in the basement.</p>
+                </div>
+                <div class="overview-card">
+                    <h3>The Challenge</h3>
+                    <p>Cooks are typically 20-30 minutes long. The goal is to create a complete-ish dish where the hero protein is cooked perfectly, supported by a sauce and other components. Dishes may sit for up to 30-40 minutes before being tasted.</p>
+                </div>
+            </div>
+        </div>
+
         <div class="tabs">
             <button class="tab-button active" onclick="showTab('main-dishes')">Main Dishes</button>
             <button class="tab-button" onclick="showTab('vegetarian')">Vegetarian</button>
@@ -1118,10 +1164,16 @@
 
              <div class="recipe-card">
                 <h3>Peruvian Chicken</h3>
-                <h4>Main Dish Components</h4>
+                <h4>Main Dish & Salad Components</h4>
                 <ul class="ingredients-list">
                     <li><span>Chicken (thighs or breast, boneless, skinless)</span><span>1 ½ - 2 pounds</span></li>
                     <li><span>Portobellos (as substitute)</span><span></span></li>
+                    <li><span>Diced or sliced English cucumber</span><span>2 cups</span></li>
+                    <li><span>Ripe avocados, diced</span><span>1-2</span></li>
+                    <li><span>Cherry tomatoes</span><span>1 cup</span></li>
+                    <li><span>Cilantro leaves for garnishing</span><span></span></li>
+                    <li><span>Olive oil for drizzling</span><span></span></li>
+                    <li><span>Kosher salt</span><span>A generous pinch</span></li>
                 </ul>
                 <h4>Marinade & Sauces</h4>
                  <div class="ingredients-list">
@@ -1138,7 +1190,7 @@
                         <li><span>Kosher salt</span><span>1 ½ tsp</span></li>
                         <li><span>Soy sauce (optional)</span><span>1 tsp</span></li>
                     </ul>
-                    <p class="mt-3"><strong>Peruvian Green Sauce (Aji Verde):</strong></p>
+                    <p style="margin-top: 1em;"><strong>Peruvian Green Sauce (Aji Verde):</strong></p>
                     <ul>
                         <li><span>Sour cream or mayo</span><span>½ cup</span></li>
                         <li><span>Jalapeño</span><span>½</span></li>
@@ -1148,16 +1200,6 @@
                         <li><span>Squeeze of lime</span><span>1 tbsp</span></li>
                     </ul>
                 </div>
-                <h4>Avocado Cucumber Tomato Salad</h4>
-                 <ul class="ingredients-list">
-                    <li><span>Diced or sliced English cucumber</span><span>2 cups</span></li>
-                    <li><span>Ripe avocados, diced</span><span>1-2</span></li>
-                    <li><span>Cherry tomatoes</span><span>1 cup</span></li>
-                    <li><span>Cilantro leaves for garnishing</span><span></span></li>
-                    <li><span>Olive oil for drizzling</span><span></span></li>
-                    <li><span>Kosher salt</span><span>A generous pinch</span></li>
-                    <li><span>Squeeze of lime</span><span></span></li>
-                </ul>
                 <h4>Instructions</h4>
                 <ol>
                     <li>Preheat grill to medium-high or oven to 425°F. Start rice now if making.</li>
@@ -1196,7 +1238,7 @@
                         <li><span>White miso (optional)</span><span>1 tsp</span></li>
                         <li><span>Salt</span><span>1 pinch</span></li>
                     </ul>
-                     <p class="mt-3"><strong>For the Finishing Jus:</strong></p>
+                     <p style="margin-top: 1em;"><strong>For the Finishing Jus:</strong></p>
                      <ul>
                         <li><span>Juices from the packet</span><span>All</span></li>
                         <li><span>Cold butter</span><span>2 tbsp</span></li>
@@ -1245,11 +1287,19 @@
                 <input type="text" placeholder="Search sauces..." onkeyup="searchRecipes('sauces')">
             </div>
             
+            <div class="recipe-card">
+                <h3>Sauce Strategy & Application</h3>
+                <ul>
+                    <li><strong>Apply Sauce Strategically:</strong> Because dishes may sit for 30-40 minutes before tasting, avoid putting sauce directly on top of crispy elements. Layer sauce *beneath* other ingredients to prevent sogginess.</li>
+                    <li><strong>Build Pan Sauces:</strong> For red meat, pork, or seared chicken, use the pan you seared the protein in to build your sauce. The browned bits (fond) on the bottom of the pan are packed with flavor. Sear the protein, remove it to rest or finish in the oven, then use that same pan to build your sauce.</li>
+                    <li><strong>Stabilize Delicate Sauces:</strong> A beurre blanc can be stabilized with a small splash of heavy cream or a bit of mustard, which act as emulsifiers and prevent the sauce from breaking.</li>
+                </ul>
+            </div>
+
             <div class="sauce-card">
                 <h4>1. Aji Verde Blender Sauce</h4>
                 <p><strong>Profile:</strong> Bright, creamy, herbaceous. Great on beef, chicken, and veg.</p>
                 <p><strong>Make:</strong> Blend 30g (2 tbsp) cilantro, 15g (1 tbsp) jalapeño, 5g (1 tsp) garlic, 25g (1½ tbsp) lime juice, 80g (⅓ cup) mayonnaise, 20g (1½ tbsp) olive oil, and 3g (½ tsp) salt on high until smooth.</p>
-                <p><strong>Fixes:</strong> If bitter, use more leaves and add 5g honey. If too thick, thin with 10-20g water.</p>
             </div>
             <div class="sauce-card">
                 <h4>2. Cherry Red Wine Pan Jus</h4>
@@ -1321,6 +1371,68 @@
                 <p><strong>Profile:</strong> Bright berry umami to cut fat. Fantastic with burgers or pork.</p>
                 <p><strong>Make:</strong> Simmer 200g (¾ cup + 2 tbsp) mixed berries and 12g (2½ tsp) sugar for 8-10 minutes until it coats a spoon. Finish with 8g (1½ tsp) lemon juice and a 0.5g (⅛ tsp) pinch of salt.</p>
             </div>
+            <div class="recipe-card">
+                <h3>Salsa Verde Base</h3>
+                <p><strong>Yield:</strong> 1 quart</p>
+                <h4>Ingredients</h4>
+                <ul class="ingredients-list">
+                    <li><span>Lemon Juice</span><span>1 Cup</span></li>
+                    <li><span>Apple Cider Vinegar</span><span>½ Cup</span></li>
+                    <li><span>Lemon zest</span><span>1 Each</span></li>
+                    <li><span>Blended oil</span><span>1.5 Cups</span></li>
+                    <li><span>Shallot (brunoise)</span><span>2 Cups</span></li>
+                    <li><span>Calabrian Chile (minced)</span><span>¼ Cup</span></li>
+                    <li><span>Capers (chopped)</span><span>¼ Cup</span></li>
+                    <li><span>Honey</span><span>1 Tbsp</span></li>
+                    <li><span>Salt</span><span>To Taste</span></li>
+                </ul>
+                <h4>Instructions</h4>
+                <ol>
+                    <li>Combine all ingredients in a mixing bowl.</li>
+                    <li>Mix until fully combined.</li>
+                    <li>Add salt as needed to taste.</li>
+                </ol>
+            </div>
+             <div class="recipe-card">
+                <h3>Aioli Base</h3>
+                <p><strong>Yield:</strong> 10 quarts</p>
+                <h4>Ingredients</h4>
+                 <ul class="ingredients-list">
+                    <li><span>Egg yolk</span><span>1 Quart</span></li>
+                    <li><span>Confit garlic</span><span>1.5 Cups</span></li>
+                    <li><span>Raw garlic</span><span>½ Cup</span></li>
+                    <li><span>Canola oil</span><span>2 Gallons</span></li>
+                    <li><span>Lemon juice</span><span>1 Cup</span></li>
+                    <li><span>Water</span><span>1 Quart</span></li>
+                    <li><span>Salt</span><span>5 Tbsp</span></li>
+                </ul>
+                <h4>Instructions</h4>
+                <ol>
+                    <li>In a large (12 quart) container, combine yolks, raw garlic, confit garlic, water, lemon juice, and salt.</li>
+                    <li>Using a large immersion blender (burr mixer), mix until smooth.</li>
+                    <li>While blending, slowly stream in the oil until the mixture is fully emulsified.</li>
+                    <li>Check and adjust seasoning as needed.</li>
+                    <li>Date, label, and store in the walk-in cooler.</li>
+                </ol>
+            </div>
+             <div class="recipe-card">
+                <h3>Lemon Vinaigrette</h3>
+                <p><strong>Yield:</strong> 0.5 quart</p>
+                <h4>Ingredients</h4>
+                <ul class="ingredients-list">
+                    <li><span>Thyme (chopped)</span><span>¼ cup</span></li>
+                    <li><span>Lemon zest</span><span>2 each</span></li>
+                    <li><span>Shallot (brunoise)</span><span>½ Cup</span></li>
+                    <li><span>Lemon Juice</span><span>1 Cup</span></li>
+                    <li><span>Blended Oil</span><span>1 Cup</span></li>
+                    <li><span>Salt</span><span>1 tsp</span></li>
+                </ul>
+                <h4>Instructions</h4>
+                <ol>
+                    <li>Combine all ingredients in a mixing bowl and whisk thoroughly.</li>
+                    <li>Add more salt if needed.</li>
+                </ol>
+            </div>
         </div>
 
         <div id="sides" class="tab-content">
@@ -1347,10 +1459,10 @@
             <div class="recipe-card">
                 <h3>Twelve Elite Side Templates</h3>
                 <ol>
-                    <li><strong>Orzotto in 10:</strong> Creamy, one-pan side. Toast 1 cup orzo in oil, add 2 cups hot stock, stir until tender, finish with butter, cheese, and 1 spoon of acid.</li>
+                    <li><strong>Orzotto in 10 / Risotto in 20:</strong> A true risotto takes 18-20 minutes. Start it immediately. For a faster version, use orzo.</li>
                     <li><strong>Five Minute Couscous:</strong> Zero babysitting. Pour 1 cup boiling liquid over 1 cup couscous, cover, fluff, and fold in herbs, oil, and 1 spoon of acid.</li>
-                    <li><strong>Crisp Smashed Potatoes:</strong> Steakhouse energy. Simmer 300g baby potatoes till tender, smash, crisp in 2 spoons of fat, baste with butter, and finish with 1 spoon of acid.</li>
-                    <li><strong>Creamy Cauliflower Puree:</strong> Silky, expensive-looking base. Simmer 500g cauliflower in 200ml dairy until soft, blend with butter, season hard, and finish with 1 spoon of acid.</li>
+                    <li><strong>Crisp Smashed Potatoes:</strong> Boil small potatoes for ~15 mins until tender, smash, then crisp in a hot pan with oil or briefly in a fryer to blister the skin.</li>
+                    <li><strong>Creamy Cauliflower Puree:</strong> Silky, expensive-looking base. Simmer 500g cauliflower in 200ml dairy until soft, blend with butter, season hard, and finish with lemon.</li>
                     <li><strong>Charred Broccolini:</strong> Color and snap. Hard sear 300g broccolini in 2 spoons of oil, splash with water to steam, reduce, and finish with chili and 1 spoon of lemon.</li>
                     <li><strong>Honey Soy Glazed Carrots:</strong> Sweet, salty, camera-ready shine. Sear 300g carrot batons, add 2 spoons soy/water, reduce to a glaze, and mount butter.</li>
                     <li><strong>Green Bean Almondine (Modern):</strong> A classic made brighter. Blanch 300g beans, toss in 2 spoons of brown butter with almonds, finish with 1 spoon of lemon and parsley.</li>
@@ -1369,23 +1481,43 @@
                 <input type="text" placeholder="Search breads..." onkeyup="searchRecipes('quick-breads')">
             </div>
 
+             <div class="recipe-card">
+                <h3>Pasta Dough</h3>
+                <p><strong>Yield:</strong> 11 Pounds</p>
+                 <h4>Ingredients</h4>
+                <ul class="ingredients-list">
+                    <li><span>All-Purpose Flour</span><span>9.2 Pounds</span></li>
+                    <li><span>Whole Eggs</span><span>18 Each</span></li>
+                    <li><span>Liquid Egg Yolk</span><span>2 Cartons</span></li>
+                    <li><span>Olive Oil</span><span>½ Cup</span></li>
+                    <li><span>Milk</span><span>1 Cup</span></li>
+                </ul>
+                <h4>Instructions</h4>
+                <ol>
+                    <li>In a bowl, combine eggs, egg yolks, milk, and olive oil. Whisk together thoroughly.</li>
+                    <li>Place the flour in a stand mixer fitted with the dough hook attachment.</li>
+                    <li>Turn the mixer on low and gradually add the wet egg mixture.</li>
+                    <li>Mix on low until all ingredients are completely incorporated and a dough forms.</li>
+                    <li>Remove the dough from the bowl, form it into a ball, and wrap it tightly in plastic wrap to rest.</li>
+                </ol>
+            </div>
             <div class="recipe-card">
-                <h3>A) Ten Minute Yogurt Skillet Flatbread</h3>
+                <h3>Ten Minute Yogurt Skillet Flatbread</h3>
                 <p><strong>Yield:</strong> 6 small rounds</p>
                 <p><strong>Method:</strong> Mix 240g (1 cup) self-rising flour and 240g (1 cup) Greek yogurt into a soft dough with 10g (2 tsp) olive oil. Divide into 6 balls, roll to 3-4mm, and cook on a medium-hot dry skillet for 60-90 seconds per side. Wrap in a towel to keep pliable.</p>
             </div>
             <div class="recipe-card">
-                <h3>B) Fast Flour Tortillas with Hot Water</h3>
+                <h3>Fast Flour Tortillas with Hot Water</h3>
                 <p><strong>Yield:</strong> 8 medium</p>
                 <p><strong>Method:</strong> Whisk 300g (1¼ cups) AP flour with 6g (1 tsp) salt and 3g (½ tsp) baking powder. Stir in 180g (¾ cup) very hot water and 30g (2 tbsp) oil or lard. Knead until smooth, rest for 5-10 minutes. Roll very thin and cook for 30-45 seconds per side on a ripping hot skillet.</p>
             </div>
             <div class="recipe-card">
-                <h3>C) Corn Tortillas (Masa Harina)</h3>
+                <h3>Corn Tortillas (Masa Harina)</h3>
                 <p><strong>Yield:</strong> 10 small</p>
                 <p><strong>Method:</strong> Mix 240g (1 cup) masa harina with 200-230g (~1 cup) warm water and 4g (¾ tsp) salt to a soft clay texture. Rest covered for 10 minutes. Press between plastic and cook for 45-60 seconds on the first side, then 30-45 seconds on the second, pressing lightly to encourage puffing.</p>
             </div>
-            <div class="recipe-card">
-                <h3>D) Fast Ricotta Gnocchi</h3>
+             <div class="recipe-card">
+                <h3>Fast Ricotta Gnocchi</h3>
                 <p><strong>Yield:</strong> 2 large portions</p>
                 <p><strong>Method:</strong> Whisk 250g (1 cup) well-drained ricotta, 1 large egg, 5g (1 tsp) salt, and 40g (¼ cup) parmesan. Fold in 90-110g (about ¾ cup) of AP flour to form a soft dough. Roll into 2cm ropes and cut into 2cm pillows. Simmer in salted water and remove 20 seconds after they float. Finish directly in a pan sauce.</p>
             </div>
@@ -1398,19 +1530,19 @@
             </div>
 
             <div class="recipe-card">
-                <h3>1. The Master Brine (for 1 Quart Jar)</h3>
+                <h3>1. The Master Brine (2:1 Water to Vinegar)</h3>
                 <ul class="ingredients-list">
-                    <li><span>Vinegar</span><span>1 cup (240 g)</span></li>
-                    <li><span>Water</span><span>1 cup (240 g)</span></li>
-                    <li><span>Kosher Salt</span><span>2 tsp (12 g)</span></li>
-                    <li><span>Sugar</span><span>2½ tsp (12 g)</span></li>
+                    <li><span>Vinegar</span><span>1 part</span></li>
+                    <li><span>Water</span><span>2 parts</span></li>
+                    <li><span>Kosher Salt</span><span>To taste</span></li>
+                    <li><span>Sugar</span><span>To taste</span></li>
                 </ul>
-                <p>Adjust vinegar/water ratio for strength: 50/50 for classic, 70/30 for punchy. Use rice vinegar for coastal plates, apple cider for fruity, red wine for red meats.</p>
+                <p><strong>Note:</strong> A 2:1 water-to-vinegar ratio is recommended for a balanced, less aggressive quick pickle. Shave vegetables paper-thin for maximum flavor penetration in minutes.</p>
             </div>
             <div class="recipe-card">
                 <h3>2. Two Fast Methods</h3>
-                <h4>A) Flash Cure (No-Cook) - 10-15 Mins</h4>
-                <p>Best for thin-sliced red onion, shallot, jalapeño, cabbage, and fennel. Simply massage the vegetables in a bowl with the brine and let rest.</p>
+                <h4>A) Flash Cure (No-Cook) - 5-15 Mins</h4>
+                <p>Best for thin-sliced red onion, shallot, jalapeño, cabbage, and fennel. Simply massage the vegetables in a bowl with the brine and let rest for as little as 5 minutes.</p>
                 <h4>B) Hot Pour - 30 Mins</h4>
                 <p>Best for cucumber, carrots, green beans, cauliflower, and radish. Pack a jar with vegetables and a flavor pack. Pour boiling brine over them, seal, and let rest. Use an ice bath to chill assist for faster results.</p>
             </div>
@@ -1430,6 +1562,59 @@
                 <input type="text" placeholder="Search techniques..." onkeyup="searchRecipes('techniques')">
             </div>
 
+             <div class="recipe-card">
+                <h3>The Flavor Architect: Acid, Crunch & Finishers</h3>
+                <h4>1. Acid is Your Best Friend</h4>
+                <p>Acid provides a bright, fresh punch at the end of cooking. Always try to grab a lemon.
+                <ul>
+                    <li><strong>Level 1 (Brightest):</strong> Lemon juice, applied right at the end for a pop.</li>
+                    <li><strong>Level 2:</strong> Lime juice.</li>
+                    <li><strong>Level 3 (Deeper Flavors):</strong> Vinegars (sherry, champagne, etc.) are for building flavor *during* the cooking process.</li>
+                </ul>
+                </p>
+                <h4>2. Always Add Crunch</h4>
+                <p>Incorporate texture to avoid soft-on-soft dishes. This can be achieved with apples, breadcrumbs, toasted nuts, croutons, crispy fried shallots, or quick-pickled vegetables.</p>
+                <h4>3. The Final Flourish</h4>
+                <ul>
+                    <li><strong>Salt:</strong> Finishing with a high-quality flake salt like Maldon adds flavor and texture.</li>
+                    <li><strong>Pepper:</strong> Freshly cracked black pepper adds flavor and crucial aroma that pre-ground pepper lacks.</li>
+                    <li><strong>Oil:</strong> A drizzle of good quality or flavored olive oil can make a dish look and taste richer, adding shine and preventing dryness.</li>
+                </ul>
+            </div>
+
+             <div class="recipe-card">
+                <h3>Protein Strategy & Cooking</h3>
+                <h4>Fish is Faster than Chicken</h4>
+                <p>In a time crunch, fish is generally a safer and faster bet. Most fish fillets can be cooked perfectly in 8-10 minutes, whereas a chicken breast can be difficult to cook through without drying out in 20 minutes.</p>
+                <h4>Cooking Chicken</h4>
+                <p>If you cook chicken, sear it first for color, then finish it in a hot oven (400-450°F) to ensure it cooks evenly without drying out on the stovetop. A quick 15-20 minute brine can also help retain moisture.</p>
+                 <h4>Searing Fish</h4>
+                <p>Always sear fish skin-side down first in a hot-enough pan. This allows you to control the color and get a crispy skin. Once the pan is hot, the fish should not stick. Don't be afraid to peek under the fillet as it cooks to check the color.</p>
+                <h4>Checking for Doneness</h4>
+                <p>Use a thin metal skewer or cake tester to check for doneness in fish and meat. It should slide in with zero resistance. For fish, you can also use your finger; if it's done, the flesh will start to flake and offer no resistance. For steaks, the cake tester can be touched to your lip or wrist to gauge the internal temperature.</p>
+                 <h4>Slicing & Resting</h4>
+                <p>Slicing proteins like hanger or sirloin steak allows you to ensure it's cut correctly against the grain for maximum tenderness. It also lets the judges see the cook immediately. When you slice, keep the pieces together to retain heat and juices. **Always rest proteins for at least 4 minutes** (8-10 for larger cuts) before slicing.</p>
+            </div>
+             <div class="recipe-card">
+                <h3>Sofrito (Aromatic Base)</h3>
+                <p><strong>Yield:</strong> 2 Quarts</p>
+                <h4>Ingredients</h4>
+                <ul class="ingredients-list">
+                    <li><span>Garlic, mandolined</span><span>2.5 Cups</span></li>
+                    <li><span>Shallot, thin sliced</span><span>2 qt</span></li>
+                    <li><span>Fresno Chile, deseeded & small dice</span><span>1 Cup</span></li>
+                    <li><span>Blended Oil</span><span>1.5 Cups</span></li>
+                    <li><span>Salt</span><span>2 tsp</span></li>
+                </ul>
+                <h4>Instructions</h4>
+                <ol>
+                    <li>Thinly slice the shallots and mandoline the garlic. Deseed the Fresno chiles and cut into a small dice.</li>
+                    <li>Add all ingredients to a single sauce pot.</li>
+                    <li>Cook over low heat, stirring occasionally, until the garlic, shallots, and chiles are all tender and aromatic.</li>
+                    <li>Label, date, and store appropriately.</li>
+                </ol>
+            </div>
+
             <div class="technique-card">
                 <h3>Salmon Seasoning Guide</h3>
                 <h4>Seasoning That Actually Sticks</h4>
@@ -1440,28 +1625,8 @@
                 </ol>
                 <h4>Honey Garlic Butter Punch (Quick Pan Glaze)</h4>
                 <p>Reduce 2 tsp honey, 1 microplaned garlic clove, 1 tsp soy sauce, and 1 tsp white miso until syrupy. Pull off the heat, whisk in 1 tsp lemon juice, then mount 1 tbsp of cold butter cubes to make it glossy. Brush only on the flesh side after cooking.</p>
-                <h4>Sear and Baste Timeline</h4>
-                <ol>
-                    <li>Pan on medium heat with a thin film of neutral oil.</li>
-                    <li>Place salmon skin-side down. Press gently with a fish spatula for 30-40 seconds to keep it flat.</li>
-                    <li>Cook skin-side down until doneness climbs about 4/5ths up the side. Tilt the pan and baste the flesh side with foaming butter for 30-45 seconds.</li>
-                    <li>Briefly "kiss" the flesh side on the pan for 15-30 seconds.</li>
-                    <li>Rest on a wire rack while making the glaze, then brush the glaze on the flesh side only.</li>
-                </ol>
-                <h4>Sauce Placement for Crispy Skin</h4>
-                <ul>
-                    <li><strong>Underpaint:</strong> Spoon a small pool of sauce on the plate and set the fish on top, skin-side up.</li>
-                    <li><strong>Around, not on:</strong> Dot or nappe the sauce around the fish.</li>
-                    <li><strong>Brush Finish:</strong> Brush the glaze on the flesh right before serving, keeping the skin dry.</li>
-                </ul>
-                 <h4>Ramsay Grade Plating</h4>
-                <ol>
-                    <li>Warm plate. Swipe a small sauce base.</li>
-                    <li>Fish goes skin up, slightly off center.</li>
-                    <li>Brush glaze on flesh side.</li>
-                    <li>Add a small bright element for contrast on the side, like a lemon dressed herb salad.</li>
-                    <li>Finish with flake salt on the flesh side and one last micro swipe of lemon zest in the air.</li>
-                </ol>
+                <h4>The Art of Plating</h4>
+                <p>Less is more. Aim for 4-5 "touches" (elements) on the plate. Keep elements grouped together to ensure a perfect bite with every spoonful. Use negative space and create height. Use your hands or a spoon ("God's tweezers") for a more natural look than overly precise tweezer placements.</p>
             </div>
         </div>
         
@@ -1549,23 +1714,25 @@
             </div>
             
             <div class="recipe-card">
-                <h3>Food Safety and Sanitation Anchors</h3>
+                <h3>Protein Resting Times</h3>
+                <p>Proper resting is critical. Plan for **at least 4 minutes** for most proteins. Larger cuts may need 8-10 minutes. This allows juices to redistribute, ensuring a more tender and flavorful result.</p>
                 <ul>
-                    <li>Use a dedicated raw zone on a tray and a clean board for slicing cooked items.</li>
-                    <li>Use a fresh spoon for every taste.</li>
-                    <li>Resting times: Beef 5-8 minutes, Pork 6 minutes, Chicken 3 minutes.</li>
-                    <li>Ensure towels used for fish are bone dry before it goes into the pan.</li>
+                    <li><strong>Beef:</strong> 5-8 minutes</li>
+                    <li><strong>Pork:</strong> 6 minutes</li>
+                    <li><strong>Chicken:</strong> 3-5 minutes</li>
                 </ul>
             </div>
 
             <div class="quick-ref-card">
-                <h3>Temperature Targets (Pull Temps Before Rest)</h3>
+                <h3>Temperature Targets (Fahrenheit)</h3>
+                <p><strong>Crucial Note on Carryover Cooking:</strong> The internal temperature of a protein will continue to rise by 5-10°F after being removed from the heat. The temperatures below are the **pull temperatures**—the temperature at which you should take the meat off the heat to rest.</p>
                 <ul>
-                    <li><strong>Ribeye/Sirloin:</strong> Pull 122-126°F</li>
-                    <li><strong>Pork:</strong> Pull 140°F (rests to 145°F)</li>
-                    <li><strong>Lamb:</strong> Pull 125-130°F</li>
-                    <li><strong>Chicken:</strong> Cook to 165°F</li>
-                    <li><strong>Salmon:</strong> Pull 122-126°F for competition texture</li>
+                    <li><strong>Veal:</strong> Pull at 120-135°F for medium-rare to medium.</li>
+                    <li><strong>Pork (thick chops):</strong> Pull at 130-135°F for a juicy, slightly pink result (will rest to 145°F).</li>
+                    <li><strong>Ribeye/Sirloin:</strong> Pull at 122-126°F for medium-rare.</li>
+                    <li><strong>Lamb:</strong> Pull at 125-130°F for medium-rare.</li>
+                    <li><strong>Chicken:</strong> Cook to a final temperature of 165°F.</li>
+                    <li><strong>Salmon:</strong> Pull at 122-126°F for a perfect competition texture.</li>
                 </ul>
             </div>
         </div>
@@ -1577,72 +1744,26 @@
             </div>
 
             <div class="recipe-card">
-                <h3>1. Sauce Range Beyond Cream and Pan Reductions</h3>
+                <h3>1. Mental Prep: Master Your "Foolproof Five"</h3>
+                <p><strong>Why it matters:</strong> Having a handful of memorized, simple, foolproof recipes is the most important strategy. It frees up mental energy to adapt to the challenge.</p>
+                <p><strong>Build This:</strong> Don't just memorize recipes; refine them. For each of your core dishes, have variations for different proteins (fish, chicken, red meat). Practice them until it's pure muscle memory. Plan a "deconstructed" version in case you run out of time for precise plating.</p>
+            </div>
+            <div class="recipe-card">
+                <h3>2. Cook Your Food: Stick to Strengths</h3>
+                <p><strong>Why it matters:</strong> Especially in early rounds, trying to be overly impressive with unfamiliar techniques is a high-risk, low-reward strategy. Let other people make mistakes.</p>
+                <p><strong>Build This:</strong> Cook what you know and cook it perfectly. Identify your "adjacent strengths"—if you're great at French food, think about how to apply those techniques to other cuisines rather than attempting something completely new. Cook your food, and tweak it based on the ingredients you get.</p>
+            </div>
+            <div class="recipe-card">
+                <h3>3. Sauce Range Beyond Cream and Pan Reductions</h3>
                 <p><strong>Why it matters:</strong> Many audition plates suffer from dryness or one-note richness. Judges reward moisture, clarity, and contrast.</p>
                 <p><strong>Build This:</strong> Beurre monté (60s), blender aioli (90s), chopped salsa verde (120s), gastrique (3-4m).</p>
                 <p><strong>Drill:</strong> In six minutes, produce a beurre monté, salsa verde, and a quick peppercorn cream.</p>
             </div>
             <div class="recipe-card">
-                <h3>2. Fast Acid Work and Brightness on Command</h3>
+                <h3>4. Fast Acid Work and Brightness on Command</h3>
                 <p><strong>Why it matters:</strong> Acid is the easiest way to create a professional finish in under twenty minutes.</p>
                 <p><strong>Build This:</strong> Always grab one acid and one herb. Make micro pickles if sugar is available; otherwise, use only salt and vinegar.</p>
                 <p><strong>Drill:</strong> In a four-minute sprint, make lemon segments, a grated zest salt, a flash pickle of shaved veg, and a pan deglaze with vinegar.</p>
-            </div>
-            <div class="recipe-card">
-                <h3>3. Vegetable Command Under Ten Minutes</h3>
-                <p><strong>Why it matters:</strong> Vegetables are where many plates lose time and texture.</p>
-                <p><strong>Build This:</strong> A quick puree (simmer veg in cream, blend hard, mount butter) or a char-and-steam (sear veg, splash water and cover, finish open with oil and acid).</p>
-                <p><strong>Drill:</strong> Cook one vegetable two ways (puree and char/steam) in eight minutes.</p>
-            </div>
-            <div class="recipe-card">
-                <h3>4. The "Crisp-Creamy-Fresh" Texture Triangle</h3>
-                <p><strong>Why it matters:</strong> Contrast makes speed cooking feel intentional, not like a compromise.</p>
-                <p><strong>Build This:</strong> Every plate should have one crunch element, one creamy/saucy element, and one fresh bite.</p>
-                 <p><strong>Drill:</strong> Run any protein with a toasted crumb/nut, a spoon sauce, and a raw herb salad or shaved veg.</p>
-            </div>
-             <div class="recipe-card">
-                <h3>5. Knife Speed and Accuracy</h3>
-                <p><strong>Why it matters:</strong> Uneven cuts force a choice between undercooked and overcooked.</p>
-                <p><strong>Build This:</strong> Chicken tender butterfly (10s), 1 cup small dice onion (90s), pepper julienne (60s).</p>
-                 <p><strong>Drill:</strong> Do a ten-minute cut test, filming yourself to score for speed and uniformity.</p>
-            </div>
-            <div class="recipe-card">
-                <h3>6. Fish and Odd Part Readiness</h3>
-                <p><strong>Why it matters:</strong> The platform loves using collars, heads, and skin-on fillets.</p>
-                <p><strong>Build This:</strong> Halibut/salmon collar roast (12m), pan-roasted fish cheeks (8m), pin bone removal (60s).</p>
-                <p><strong>Drill:</strong> Buy one whole fish or a head and practice a start-to-finish cheeks and collar dish in fifteen minutes.</p>
-            </div>
-            <div class="recipe-card">
-                <h3>7. Plan B and Plan C Thinking</h3>
-                <p><strong>Why it matters:</strong> You will not always get the protein you want.</p>
-                <p><strong>Build This:</strong> Write a two-line plan for each protein group that uses the same sauce and veg technique (e.g., seared scallops or shallow-fried chicken cutlet both finished with lemon caper butter).</p>
-            </div>
-             <div class="recipe-card">
-                <h3>8. The First 90 Seconds of Station Setup</h3>
-                <p><strong>Why it matters:</strong> Early heat and layout determine your ceiling for success.</p>
-                <p><strong>Build This:</strong> Pan heating by 0:30, sheet tray in oven by 1:00, cutting board anchored, and salt, acid, oil, and a tasting spoon within one reach.</p>
-            </div>
-             <div class="recipe-card">
-                <h3>9. Plating Speed and Composition</h3>
-                <p><strong>Why it matters:</strong> Rushed plates look messy on camera and to judges.</p>
-                <p><strong>Build This:</strong> Sauce under the protein OR a gloss on top (not both), use odd numbers of small items, and add one fresh green for life and scent.</p>
-            </div>
-             <div class="recipe-card">
-                <h3>10. On-Camera Narration While You Work</h3>
-                <p><strong>Why it matters:</strong> Mentors and judges want to hear a plan. It also steadies your mind under pressure.</p>
-                <p><strong>Build This:</strong> A 15-second script you can say while moving, like: "I grabbed salmon, peppers, and lemon. I am searing to medium, making lemon butter, charring peppers, and finishing with herb and toasted crumb. I will plate sauce under for moisture and sheen".</p>
-            </div>
-            <div class="recipe-card">
-                <h3>11. Dessert Contingency</h3>
-                <p><strong>Why it matters:</strong> A quick sweet can protect you if a dessert challenge appears.</p>
-                <p><strong>Build This:</strong> Crepe batter (2m), caramelized fruit in butter with acid/herb, whipped cream or sabayon (3-5m).</p>
-                 <p><strong>Drill:</strong> An eight-minute dessert of one-pan crepes or butter-roasted fruit with a flavored cream and a crumb.</p>
-            </div>
-            <div class="recipe-card">
-                <h3>12. Seasoning Math and Tasting Cadence</h3>
-                <p><strong>Why it matters:</strong> Under time stress, most cooks under-season and forget the final acid.</p>
-                <p><strong>Build This:</strong> Know salt benchmarks (e.g., soup/puree starts at ~6g/liter). Taste three times: after the sear, after reduction, and at the pass.</p>
-                <p><strong>Drill:</strong> Make a base puree and split it into three bowls. Season one with salt only, one with salt and acid, and one with salt, acid, and butter to compare.</p>
             </div>
         </div>
     </div>
@@ -1693,7 +1814,7 @@
             tab = document.getElementById(tabId);
             
             // Define the searchable items for different tabs
-            let selector = '.recipe-card, .technique-card, .sauce-card, .alarm-item, .conversion-table tbody tr';
+            let selector = '.recipe-card, .technique-card, .sauce-card, .alarm-item, .conversion-table tbody tr, .overview-card';
             itemsToSearch = tab.querySelectorAll(selector);
 
             // Loop through all list items, and hide those who don't match the search query
@@ -1713,9 +1834,6 @@
             // The HTML already sets the first tab to active, so no initial call is needed.
         });
     </script>
-
-</body>
-</html>
 
 </body>
 </html>
